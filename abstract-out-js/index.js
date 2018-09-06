@@ -8,22 +8,23 @@ function abstractOutJs({ filepath }) {
     const html = fs.readFileSync(filepath, 'utf-8')
     const $ = cheerio.load(html)
     let scriptTagContent = $('body > script')
-
-    console.log(scriptTagContent)
+    // console.log(scriptTagContent)
     console.log(typeof scriptTagContent)
     // .split(/\n/)
     // .shift()
     // .pop()
     // .join(/\n/)
-    fs.writeFileSync('script-tag-content.json', scriptTagContent, {})
+
+    const targetDir = filepath
+      .split('/')
+      .slice(0, -1)
+      .concat([''])
+      .join('/')
+    console.log('targetDir', targetDir)
+    fs.writeFileSync('script-tag-content.js', scriptTagContent, {})
   } else {
     console.log(`${filepath} not found`)
   }
 }
 
 module.exports = abstractOutJs
-
-abstractOutJs({
-  filepath:
-    '/Users/m/workspace/visjs-network/examples/other/clusteringByZoom/index.html'
-})
