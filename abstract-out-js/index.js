@@ -56,7 +56,7 @@ function abstractOutJs({ filepath }) {
           scriptTagInlineJsPattern,
           "<script src='./index.js' type='text/javascript'></script>"
         )
-        .replace(/"/, /'/)
+        .replace(/"/g, `'`)
 
       //
       // write out replaced html to filepath
