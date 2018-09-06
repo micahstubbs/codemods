@@ -1,0 +1,9 @@
+{
+  "name": "codemods",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:micahstubbs/codemods.git",
+  "author": "@micahstubbs <micah.stubbs@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
