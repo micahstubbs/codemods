@@ -44,10 +44,12 @@ function abstractOutJs({ filepath }) {
     //
     // replace with
     // <script src='./index.js' type='text/javascript'></script>
-    const newHTML = html.replace(
-      /<script type="text\/javascript">[\s\S]*<\/script>/,
-      "<script src='./index.js' type='text/javascript'></script>"
-    )
+    const newHTML = html
+      .replace(
+        /<script type="text\/javascript">[\s\S]*<\/script>/,
+        "<script src='./index.js' type='text/javascript'></script>"
+      )
+      .replace(/"/, /'/)
 
     //
     // write out replaced html to filepath
