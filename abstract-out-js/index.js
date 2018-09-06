@@ -18,7 +18,7 @@ function abstractOutJs({ filepath }) {
       .split('/')
       .slice(0, -1)
       .join('/')
-    console.log('targetDir', targetDir)
+    // console.log('targetDir', targetDir)
     const outputFilepath = `${targetDir}/index.js`
     fs.writeFileSync(outputFilepath, scriptTagContent, {})
     console.log(`wrote script tag contents to ${outputFilepath}`)
