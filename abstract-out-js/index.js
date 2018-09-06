@@ -6,22 +6,22 @@ function abstractOutJs({ filepath }) {
   if (fs.existsSync(filepath)) {
     // read index.html file
     const html = fs.readFileSync(filepath, 'utf-8')
-    const $ = cheerio.load(html)
-    let scriptTagContent = $('body > script')
+    const $ = cheerio.load(html, { xmlMode: true })
+    // let scriptTagContent = $('body > script')
+    let scriptTagContent = $('script:not([src])')[0].children[0].data.slice(
+      1,
+      -2
+    )
     // console.log(scriptTagContent)
-    console.log(typeof scriptTagContent)
-    // .split(/\n/)
-    // .shift()
-    // .pop()
-    // .join(/\n/)
 
     const targetDir = filepath
       .split('/')
       .slice(0, -1)
-      .concat([''])
       .join('/')
     console.log('targetDir', targetDir)
-    fs.writeFileSync('script-tag-content.js', scriptTagContent, {})
+    const outputFilepath = `${targetDir}/index.js`
+    fs.writeFileSync(outputFilepath, scriptTagContent, {})
+    console.log(`wrote script tag contents to ${outputFilepath}`)
   } else {
     console.log(`${filepath} not found`)
   }
