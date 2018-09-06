@@ -1,5 +1,6 @@
 const fs = require('fs')
 const cheerio = require('cheerio')
+const { exec } = require('child_process')
 
 function abstractOutJs({ filepath }) {
   // check if index.html file exists
@@ -21,10 +22,6 @@ function abstractOutJs({ filepath }) {
     // console.log(scriptTagContent)
 
     //
-    // prettier format js
-    //
-
-    //
     // write the js out to an index.js file
     //
     const targetDir = filepath
@@ -35,6 +32,18 @@ function abstractOutJs({ filepath }) {
     const outputFilepath = `${targetDir}/index.js`
     fs.writeFileSync(outputFilepath, scriptTagContent, {})
     console.log(`wrote script tag contents to ${outputFilepath}`)
+
+    //
+    // prettier format js
+    //
+    exec(
+      `${__dirname}/../node_modules/.bin/prettier --config ${__dirname}/../.prettierrc.json --write ${outputFilepath}`
+    )
+    // console.log(
+    //   `${__dirname}/../node_modules/.bin/prettier --config ${__dirname}/../.prettierrc.json --write ${outputFilepath}`
+    // )
+    console.log('prettier formatting parsed js')
+    console.log(`prettier --config .prettierrc.json --write ${outputFilepath}`)
 
     //
     // replace script tag in html
