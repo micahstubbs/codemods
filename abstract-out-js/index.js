@@ -21,7 +21,7 @@ function abstractOutJs({ filepath }) {
         .replace(`<script type="text/javascript">`, '')
         .replace(`</script>`, '')
         .trim()
-      console.log('scriptTagContent', scriptTagContent)
+      // console.log('scriptTagContent', scriptTagContent)
 
       //
       // write the js out to an index.js file
