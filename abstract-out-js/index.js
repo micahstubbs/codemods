@@ -18,10 +18,8 @@ function abstractOutJs({ filepath }) {
     const scriptTagWithContent = $('script:not([src])')[0]
     // console.log('scriptTagWithContent', scriptTagWithContent)
     if (typeof scriptTagWithContent !== 'undefined') {
-      let scriptTagContent = $('script:not([src])')[0].children[0].data.slice(
-        1,
-        -2
-      )
+      let scriptTagContent = $('script:not([src])')[0].children[0].data.trim()
+      // .slice(1,-2)
 
       //
       // write the js out to an index.js file
