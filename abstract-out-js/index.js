@@ -31,7 +31,10 @@ function abstractOutJs({ filepath }) {
         .trim()
 
       // prepend eslint globals annotation
-      scriptTagContent = `/* global vis getScaleFreeNetwork */\n${scriptTagContent}`
+      let eslintAnnotation = '/* global vis */'
+      if (scriptTagContent.includes('getScaleFreeNetwork'))
+        eslintAnnotation = '/* global vis getScaleFreeNetwork */'
+      scriptTagContent = `${eslintAnnotation}\n${scriptTagContent}`
       // console.log('scriptTagContent', scriptTagContent)
 
       //
