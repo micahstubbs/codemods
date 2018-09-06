@@ -1,5 +1,4 @@
 const fs = require('fs')
-const cheerio = require('cheerio')
 const { exec } = require('child_process')
 const fixVisJsPaths = require(`${__dirname}/../fix-vis-js-paths`)
 
@@ -14,12 +13,15 @@ function abstractOutJs({ filepath }) {
     //
     // parse out js
     //
-    const $ = cheerio.load(html, { xmlMode: true })
-    const scriptTagWithContent = $('script:not([src])')[0]
-    // console.log('scriptTagWithContent', scriptTagWithContent)
-    if (typeof scriptTagWithContent !== 'undefined') {
-      let scriptTagContent = $('script:not([src])')[0].children[0].data.trim()
-      // .slice(1,-2)
+    const scriptTagInlineJsPattern = /<script type="text\/javascript">[\s\S]*<\/script>/
+    const scriptTagMatches = html.match(scriptTagInlineJsPattern)
+
+    if (scriptTagMatches !== null) {
+      let scriptTagContent = scriptTagMatches[0]
+        .replace(`<script type="text/javascript">`, '')
+        .replace(`</script>`, '')
+        .trim()
+      console.log('scriptTagContent', scriptTagContent)
 
       //
       // write the js out to an index.js file
@@ -51,7 +53,7 @@ function abstractOutJs({ filepath }) {
       //
       let newHtml = fixVisJsPaths({ html })
         .replace(
-          /<script type="text\/javascript">[\s\S]*<\/script>/,
+          scriptTagInlineJsPattern,
           "<script src='./index.js' type='text/javascript'></script>"
         )
         .replace(/"/, /'/)
