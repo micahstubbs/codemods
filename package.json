@@ -5,5 +5,8 @@
   "repository": "git@github.com:micahstubbs/codemods.git",
   "author": "@micahstubbs <micah.stubbs@gmail.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2"
+  }
 }
