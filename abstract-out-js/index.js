@@ -21,6 +21,9 @@ function abstractOutJs({ filepath }) {
         .replace(`<script type="text/javascript">`, '')
         .replace(`</script>`, '')
         .trim()
+
+      // prepend eslint globals annotation
+      scriptTagContent = `/* global vis */\n${scriptTagContent}`
       // console.log('scriptTagContent', scriptTagContent)
 
       //
