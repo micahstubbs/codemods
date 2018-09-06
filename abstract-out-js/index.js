@@ -14,12 +14,10 @@ function abstractOutJs({ filepath }) {
     // parse out js
     //
     const $ = cheerio.load(html, { xmlMode: true })
-    // let scriptTagContent = $('body > script')
     let scriptTagContent = $('script:not([src])')[0].children[0].data.slice(
       1,
       -2
     )
-    // console.log(scriptTagContent)
 
     //
     // write the js out to an index.js file
@@ -28,7 +26,6 @@ function abstractOutJs({ filepath }) {
       .split('/')
       .slice(0, -1)
       .join('/')
-    // console.log('targetDir', targetDir)
     const outputFilepath = `${targetDir}/index.js`
     fs.writeFileSync(outputFilepath, scriptTagContent, {})
     console.log(`wrote script tag contents to ${outputFilepath}`)
@@ -39,9 +36,6 @@ function abstractOutJs({ filepath }) {
     exec(
       `${__dirname}/../node_modules/.bin/prettier --config ${__dirname}/../.prettierrc.json --write ${outputFilepath}`
     )
-    // console.log(
-    //   `${__dirname}/../node_modules/.bin/prettier --config ${__dirname}/../.prettierrc.json --write ${outputFilepath}`
-    // )
     console.log('prettier formatting parsed js')
     console.log(`prettier --config .prettierrc.json --write ${outputFilepath}`)
 
