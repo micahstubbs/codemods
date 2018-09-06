@@ -37,7 +37,8 @@ function walkDir(dirpath) {
       const newHtmlFilePath = `${newDirPath}/index.html`
       if (fs.existsSync(oldHtmlFilePath)) {
         exec(`mv ${oldHtmlFilePath} ${newHtmlFilePath}`)
-        console.log(`mv ${dirpath}/${f} ${newHtmlFilePath}`)
+        console.log(`mv ${dirpath}/${f}`)
+        console.log(`  ${newHtmlFilePath}`)
       }
 
       //

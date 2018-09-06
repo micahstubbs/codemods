@@ -20,6 +20,14 @@ function abstractOutJs({ filepath }) {
       let scriptTagContent = scriptTagMatches[0]
         .replace(`<script type="text/javascript">`, '')
         .replace(`</script>`, '')
+        .replace(
+          `var network = new vis.Network(container, data, options)`,
+          `new vis.Network(container, data, options)`
+        )
+        .replace(
+          `network = new vis.Network(container, data, options)`,
+          `new vis.Network(container, data, options)`
+        )
         .trim()
 
       // prepend eslint globals annotation
