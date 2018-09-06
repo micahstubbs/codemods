@@ -41,9 +41,9 @@ function abstractOutJs({ filepath }) {
 
     //
     // replace script tag in html
+    // also
+    // replace double quotes " with ' single quotes
     //
-    // replace with
-    // <script src='./index.js' type='text/javascript'></script>
     const newHTML = html
       .replace(
         /<script type="text\/javascript">[\s\S]*<\/script>/,
